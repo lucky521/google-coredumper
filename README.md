@@ -1,7 +1,10 @@
-The coredumper library can be compiled into applications to create
-core dumps of the running program, without having to terminate
-them. It supports both single- and multi-threaded core dumps, even if
-the kernel does not have native support for multi-threaded core files.
+# Overview #
+
+The coredumper library can be compiled into applications to create core dumps of the running program -- without terminating. It supports both single- and multi-threaded core dumps, even if the kernel does not natively support multi-threaded core files.
+
+Coredumper is distributed under the terms of the BSD License.
+
+# Background #
 
 This library is primarily intended to simplify debugging of
 long-running services. It is often inacceptable to suspend production
@@ -15,6 +18,20 @@ to disk (e.g. triggered upon reception of a signal) but it can also
 generate in-memory core files.  This makes it possible for web
 services to expose remote access to core files.
 
+
+# Example #
+
+This is by no means a complete example; it simply gives you a feel for what the coredumper API looks like.
+
+```
+  #include <google/coredumper.h>
+  ...
+  WriteCoreDump('core.myprogram');
+  /* Keep going, we generated a core file,
+   * but we didn't crash.
+   */
+```
+
 The "examples" directory shows how to add a core file feature to an
 existing TFTP server. For an example of how to use on-disk core files,
 take a look at "src/coredump_unittest.c".
@@ -23,6 +40,9 @@ The code has been tested on Linux x86/32, x86/64, and ARM. It is
 distributed from http://code.google.com/p/google-coredumper. It is
 available as a tar source archive, and in prebuilt form as Debian and
 RedHat packages.
+
+
+# Build & Install #
 
 For detailed information on how to build and install this library,
 read the "INSTALL" file. On most systems, you will need to configure
@@ -60,5 +80,3 @@ packages.
 
 For more information on how to use the library, read the manual pages
 for "GetCoreDump" and "WriteCoreDump".
-
-15 February 2007
